@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Maintenance_Rebate_Percent__c</fullName>
+    <description>Rebate percentage for self-occupied residential buildings</description>
+    <label>Self-Occupied Rebate (%)</label>
+    <precision>5</precision>
+    <scale>2</scale>
+    <required>false</required>
+    <type>Percent</type>
+</CustomField>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Calculation_Explanation__c</fullName>
+    <description>Transparent mathematical breakdown of the tax computation</description>
+    <label>Calculation Explanation</label>
+    <length>3000</length>
+    <visibleLines>3</visibleLines>
+    <type>LongTextArea</type>
+</CustomField>

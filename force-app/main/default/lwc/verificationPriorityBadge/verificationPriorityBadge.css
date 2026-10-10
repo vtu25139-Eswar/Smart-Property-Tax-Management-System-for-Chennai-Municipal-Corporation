@@ -1,0 +1,14 @@
+.badge-container {
+    border-radius: 6px;
+}
+
+.factors-text {
+    font-family: inherit;
+    font-size: 13px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    background: transparent;
+    border: none;
+    margin: 0;
+    padding: 0;
+}

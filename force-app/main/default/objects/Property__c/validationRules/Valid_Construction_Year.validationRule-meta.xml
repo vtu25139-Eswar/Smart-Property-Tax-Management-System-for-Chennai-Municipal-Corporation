@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Valid_Construction_Year</fullName>
+    <active>true</active>
+    <description>Validates construction year bounds.</description>
+    <errorConditionFormula>AND(NOT(ISBLANK(Construction_Year__c)), OR(Construction_Year__c < 1850, Construction_Year__c > YEAR(TODAY())))</errorConditionFormula>
+    <errorMessage>Construction year must be between 1850 and the current year.</errorMessage>
+</ValidationRule>

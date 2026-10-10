@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Payment_Mode__c</fullName>
+    <description>Payment channel</description>
+    <label>Payment Mode</label>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Online - UPI</fullName>
+                <default>true</default>
+                <label>Online - UPI</label>
+            </value>
+            <value>
+                <fullName>Online - Net Banking</fullName>
+                <default>false</default>
+                <label>Online - Net Banking</label>
+            </value>
+            <value>
+                <fullName>Credit/Debit Card</fullName>
+                <default>false</default>
+                <label>Credit/Debit Card</label>
+            </value>
+            <value>
+                <fullName>Municipal Counter - Cash</fullName>
+                <default>false</default>
+                <label>Municipal Counter - Cash</label>
+            </value>
+            <value>
+                <fullName>Municipal Counter - DD</fullName>
+                <default>false</default>
+                <label>Municipal Counter - DD</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <type>Picklist</type>
+</CustomField>

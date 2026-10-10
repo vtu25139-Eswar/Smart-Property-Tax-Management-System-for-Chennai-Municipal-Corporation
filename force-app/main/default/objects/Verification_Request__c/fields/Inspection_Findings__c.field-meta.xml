@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Inspection_Findings__c</fullName>
+    <description>Classification of physical inspection result</description>
+    <label>Inspection Findings</label>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Area Verified Accurately</fullName>
+                <default>true</default>
+                <label>Area Verified Accurately</label>
+            </value>
+            <value>
+                <fullName>Minor Variation (<5%)</fullName>
+                <default>false</default>
+                <label>Minor Variation (<5%)</label>
+            </value>
+            <value>
+                <fullName>Major Discrepancy (>10%)</fullName>
+                <default>false</default>
+                <label>Major Discrepancy (>10%)</label>
+            </value>
+            <value>
+                <fullName>Unauthorized Construction</fullName>
+                <default>false</default>
+                <label>Unauthorized Construction</label>
+            </value>
+            <value>
+                <fullName>Change in Property Usage</fullName>
+                <default>false</default>
+                <label>Change in Property Usage</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <type>Picklist</type>
+</CustomField>

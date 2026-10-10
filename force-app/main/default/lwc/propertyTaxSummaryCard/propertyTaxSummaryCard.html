@@ -1,0 +1,126 @@
+<template>
+    <lightning-card title="Municipal Tax Status Summary" icon-name="custom:custom18">
+        <div class="slds-p-around_medium">
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Loading..." size="small"></lightning-spinner>
+            </template>
+
+            <template if:true={property}>
+                <!-- Quick KPI Row -->
+                <div class="slds-grid slds-wrap slds-gutters slds-m-bottom_medium">
+                    <div class="slds-col slds-size_1-of-2 slds-medium-size_3-of-12">
+                        <div class="slds-box slds-theme_shade kpi-tile">
+                            <div class="slds-text-title_caps slds-text-color_weak">Outstanding Dues</div>
+                            <div class="slds-text-heading_medium dues-amount">₹{formattedDues}</div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-medium-size_3-of-12">
+                        <div class="slds-box slds-theme_shade kpi-tile">
+                            <div class="slds-text-title_caps slds-text-color_weak">Assessed Annual Tax</div>
+                            <div class="slds-text-heading_medium annual-tax">₹{formattedTax}</div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-medium-size_3-of-12">
+                        <div class="slds-box slds-theme_shade kpi-tile">
+                            <div class="slds-text-title_caps slds-text-color_weak">Verification Status</div>
+                            <div class="slds-m-top_xx-small">
+                                <span class={verificationBadgeClass}>{property.Verification_Status__c}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-medium-size_3-of-12">
+                        <div class="slds-box slds-theme_shade kpi-tile">
+                            <div class="slds-text-title_caps slds-text-color_weak">Priority Tier</div>
+                            <div class="slds-m-top_xx-small">
+                                <span class={priorityBadgeClass}>Score: {property.Verification_Priority_Score__c} ({property.Verification_Priority_Level__c})</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Button Strip -->
+                <div class="slds-grid slds-grid_align-end slds-m-top_small">
+                    <lightning-button label="View Score Breakdown" icon-name="utility:info"
+                        onclick={handleOpenPriorityModal} class="slds-m-right_x-small">
+                    </lightning-button>
+                    <lightning-button label="File Dispute" icon-name="utility:warning"
+                        onclick={handleOpenDisputeModal} class="slds-m-right_x-small">
+                    </lightning-button>
+                    <lightning-button variant="brand" label="Simulate Payment" icon-name="utility:money"
+                        onclick={handleOpenPaymentModal}>
+                    </lightning-button>
+                </div>
+            </template>
+        </div>
+
+        <!-- Dispute Modal -->
+        <template if:true={isDisputeModalOpen}>
+            <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" onclick={handleCloseDisputeModal}>
+                            <lightning-icon icon-name="utility:close" alternative-text="Close" size="small"></lightning-icon>
+                        </button>
+                        <h2 class="slds-text-heading_medium">File Assessment Grievance / Dispute</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium">
+                        <lightning-combobox label="Dispute Ground" value={disputeReason} options={disputeReasonOptions} onchange={handleDisputeReasonChange} required></lightning-combobox>
+                        <lightning-input type="number" label="Claimed Plinth Area (Sq Ft)" value={claimedArea} onchange={handleClaimedAreaChange}></lightning-input>
+                        <lightning-textarea label="Detailed Justification" value={disputeDescription} onchange={handleDisputeDescChange} required></lightning-textarea>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning-button label="Cancel" onclick={handleCloseDisputeModal} class="slds-m-right_x-small"></lightning-button>
+                        <lightning-button variant="brand" label="Submit Grievance" onclick={handleSubmitDispute}></lightning-button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+
+        <!-- Payment Simulation Modal -->
+        <template if:true={isPaymentModalOpen}>
+            <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header modal-header-pay">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" onclick={handleClosePaymentModal}>
+                            <lightning-icon icon-name="utility:close" alternative-text="Close" size="small"></lightning-icon>
+                        </button>
+                        <h2 class="slds-text-heading_medium">Greater Chennai Corporation - Simulated Payment Gateway</h2>
+                        <p class="slds-m-top_x-small slds-badge slds-theme_warning">DEMO SANDBOX WORKFLOW - NO REAL MONEY IS TRANSFERRED</p>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium">
+                        <div class="slds-box slds-theme_shade slds-m-bottom_medium">
+                            <p><strong>Property Number:</strong> {property.Property_Number__c}</p>
+                            <p><strong>Owner:</strong> {property.Property_Owner_Name__c}</p>
+                            <p><strong>Current Outstanding Dues:</strong> ₹{formattedDues}</p>
+                        </div>
+
+                        <lightning-input type="number" label="Payment Amount (INR)" value={paymentAmount} min="1" step="0.01" required onchange={handlePaymentAmountChange}></lightning-input>
+                        <lightning-combobox label="Payment Channel" value={paymentMode} options={paymentModeOptions} required onchange={handlePaymentModeChange}></lightning-combobox>
+                        <lightning-input label="Payer Name" value={payerName} required onchange={handlePayerNameChange}></lightning-input>
+                        <lightning-input type="email" label="Payer Email for E-Receipt" value={payerEmail} onchange={handlePayerEmailChange}></lightning-input>
+
+                        <!-- Generated Receipt view if success -->
+                        <template if:true={receipt}>
+                            <div class="slds-box slds-theme_success slds-m-top_medium receipt-box">
+                                <h3 class="slds-text-heading_small slds-m-bottom_x-small">MUNICIPAL TAX RECEIPT</h3>
+                                <p><strong>Receipt Number:</strong> {receipt.Name}</p>
+                                <p><strong>Reference:</strong> {receipt.Payment_Reference__c}</p>
+                                <p><strong>Amount Settled:</strong> ₹{receipt.Amount_Paid__c}</p>
+                                <p><strong>Status:</strong> {receipt.Payment_Status__c}</p>
+                                <p class="watermark-note">*** OFFICIAL SANDBOX DEMONSTRATION RECEIPT ***</p>
+                            </div>
+                        </template>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning-button label="Close" onclick={handleClosePaymentModal} class="slds-m-right_x-small"></lightning-button>
+                        <template if:false={receipt}>
+                            <lightning-button variant="brand" label="Authorize Simulated Payment" onclick={handleExecutePayment}></lightning-button>
+                        </template>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+    </lightning-card>
+</template>

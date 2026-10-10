@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Claimed_Area_SqFt__c</fullName>
+    <description>Corrected built area claimed by owner</description>
+    <label>Claimed Area (Sq Ft)</label>
+    <precision>10</precision>
+    <scale>2</scale>
+    <required>false</required>
+    <unique>false</unique>
+    <type>Number</type>
+</CustomField>

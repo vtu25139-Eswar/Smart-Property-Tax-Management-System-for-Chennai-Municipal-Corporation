@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Base_Rate_Per_SqFt__c</fullName>
+    <description>Annual base rate in INR per sq ft of plinth area</description>
+    <label>Base Rate per Sq Ft (INR)</label>
+    <precision>10</precision>
+    <scale>2</scale>
+    <required>true</required>
+    <type>Currency</type>
+</CustomField>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Building_Area_Must_Be_Positive</fullName>
+    <active>true</active>
+    <description>Ensures assessed area is strictly positive.</description>
+    <errorConditionFormula>Building_Area_SqFt__c <= 0</errorConditionFormula>
+    <errorMessage>Building Area in square feet must be greater than zero.</errorMessage>
+</ValidationRule>

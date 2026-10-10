@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Assessed_Annual_Tax__c</fullName>
+    <description>Most recent annual assessed tax in INR</description>
+    <label>Assessed Annual Tax</label>
+    <precision>12</precision>
+    <scale>2</scale>
+    <required>false</required>
+    <type>Currency</type>
+</CustomField>

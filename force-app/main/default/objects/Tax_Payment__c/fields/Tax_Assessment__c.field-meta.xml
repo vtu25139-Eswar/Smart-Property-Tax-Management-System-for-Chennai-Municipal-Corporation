@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tax_Assessment__c</fullName>
+    <description>Assessment being paid</description>
+    <label>Tax Assessment</label>
+    <referenceTo>Tax_Assessment__c</referenceTo>
+    <relationshipLabel>Tax Payments</relationshipLabel>
+    <relationshipName>Tax_Payments</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    <type>MasterDetail</type>
+</CustomField>

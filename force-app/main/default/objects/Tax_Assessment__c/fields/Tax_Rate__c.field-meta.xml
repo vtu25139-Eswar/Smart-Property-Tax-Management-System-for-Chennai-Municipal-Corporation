@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tax_Rate__c</fullName>
+    <description>Configured tax rate schedule used</description>
+    <label>Applied Tax Rate</label>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <referenceTo>Tax_Rate__c</referenceTo>
+    <relationshipLabel>Tax Assessments</relationshipLabel>
+    <relationshipName>Tax_Assessments</relationshipName>
+    <required>false</required>
+    <type>Lookup</type>
+</CustomField>

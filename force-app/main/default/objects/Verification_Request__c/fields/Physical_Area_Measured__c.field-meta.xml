@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Physical_Area_Measured__c</fullName>
+    <description>Plinth area physically surveyed on-site</description>
+    <label>Physical Area Measured (Sq Ft)</label>
+    <precision>10</precision>
+    <scale>2</scale>
+    <required>false</required>
+    <unique>false</unique>
+    <type>Number</type>
+</CustomField>

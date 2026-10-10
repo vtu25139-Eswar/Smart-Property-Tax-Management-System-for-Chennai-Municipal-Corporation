@@ -1,0 +1,80 @@
+<template>
+    <lightning-card title="Chennai Municipal Corporation - Tax Assessment Calculator" icon-name="custom:custom41">
+        <div class="slds-p-around_medium">
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Calculating..." size="small"></lightning-spinner>
+            </template>
+
+            <div class="slds-grid slds-wrap slds-gutters">
+                <!-- Parameters form -->
+                <div class="slds-col slds-size_1-of-1 slds-large-size_6-of-12">
+                    <h3 class="slds-text-title_caps slds-m-bottom_small">Calculation Parameters</h3>
+
+                    <lightning-combobox label="Municipal Zone" value={zone} options={zoneOptions} onchange={handleZoneChange}></lightning-combobox>
+                    <lightning-combobox label="Property Type" value={propType} options={typeOptions} onchange={handleTypeChange}></lightning-combobox>
+                    <lightning-combobox label="Property Usage" value={propUsage} options={usageOptions} onchange={handleUsageChange}></lightning-combobox>
+                    <lightning-combobox label="Occupancy Classification" value={occupancy} options={occupancyOptions} onchange={handleOccupancyChange}></lightning-combobox>
+
+                    <lightning-input type="number" label="Plinth Area (Sq Ft)" value={area} min="10" onchange={handleAreaChange}></lightning-input>
+                    <lightning-combobox label="Financial Assessment Year" value={finYear} options={yearOptions} onchange={handleYearChange}></lightning-combobox>
+
+                    <div class="slds-m-top_medium">
+                        <lightning-button variant="brand" label="Compute Tax Breakdown" icon-name="utility:money" onclick={handleCompute}></lightning-button>
+                    </div>
+                </div>
+
+                <!-- Live Results Panel -->
+                <div class="slds-col slds-size_1-of-1 slds-large-size_6-of-12">
+                    <h3 class="slds-text-title_caps slds-m-bottom_small">Assessment Breakdown</h3>
+
+                    <template if:true={result}>
+                        <div class="slds-box slds-theme_default result-card">
+                            <div class="slds-grid slds-grid_align-spread slds-m-bottom_x-small">
+                                <span class="slds-text-color_weak">Plinth Area Assessed:</span>
+                                <strong>{result.buildingArea} sq ft</strong>
+                            </div>
+                            <div class="slds-grid slds-grid_align-spread slds-m-bottom_x-small">
+                                <span class="slds-text-color_weak">Applied Unit Base Rate:</span>
+                                <strong>₹{result.appliedBaseRate} / sq ft</strong>
+                            </div>
+                            <div class="slds-grid slds-grid_align-spread slds-m-bottom_x-small">
+                                <span class="slds-text-color_weak">Gross Annual Value:</span>
+                                <strong>₹{result.grossBaseTax}</strong>
+                            </div>
+                            <div class="slds-grid slds-grid_align-spread slds-m-bottom_x-small slds-text-color_success">
+                                <span>Self-Occupied Rebate / Concession:</span>
+                                <strong>-₹{result.rebateAmount}</strong>
+                            </div>
+                            <div class="slds-grid slds-grid_align-spread slds-m-bottom_x-small">
+                                <span class="slds-text-color_weak">Net Taxable Base:</span>
+                                <strong>₹{result.netBaseTax}</strong>
+                            </div>
+                            <div class="slds-grid slds-grid_align-spread slds-m-bottom_x-small">
+                                <span class="slds-text-color_weak">Tamil Nadu Library Cess:</span>
+                                <strong>₹{result.libraryCess}</strong>
+                            </div>
+                            <div class="slds-grid slds-grid_align-spread slds-m-bottom_x-small">
+                                <span class="slds-text-color_weak">Education Surcharge Cess:</span>
+                                <strong>₹{result.educationCess}</strong>
+                            </div>
+                            <hr class="slds-m-vertical_small" />
+                            <div class="slds-grid slds-grid_align-spread total-row">
+                                <span class="slds-text-heading_small">Total Assessed Tax:</span>
+                                <span class="slds-text-heading_medium total-amount">₹{result.totalAssessedTax}</span>
+                            </div>
+                        </div>
+
+                        <!-- Mathematical Narrative Accordion -->
+                        <div class="slds-m-top_small">
+                            <lightning-accordion active-section-name="narrative">
+                                <lightning-accordion-section name="narrative" label="Step-by-Step Transparent Audit Trail">
+                                    <pre class="explanation-box">{result.explanation}</pre>
+                                </lightning-accordion-section>
+                            </lightning-accordion>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </lightning-card>
+</template>

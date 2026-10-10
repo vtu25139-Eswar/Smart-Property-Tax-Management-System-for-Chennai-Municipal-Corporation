@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Assigned_Officer__c</fullName>
+    <description>Municipal field officer assigned</description>
+    <label>Assigned Officer</label>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <referenceTo>User</referenceTo>
+    <relationshipLabel>Assigned Verifications</relationshipLabel>
+    <relationshipName>Assigned_Verifications</relationshipName>
+    <required>false</required>
+    <type>Lookup</type>
+</CustomField>

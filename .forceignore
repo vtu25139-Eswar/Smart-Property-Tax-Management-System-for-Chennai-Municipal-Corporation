@@ -1,0 +1,10 @@
+# List files or directories below to ignore them when running sf commands.
+.sf
+.sfdx
+package.json
+package-lock.json
+node_modules
+README.md
+docs/**
+scripts/**
+.gitignore

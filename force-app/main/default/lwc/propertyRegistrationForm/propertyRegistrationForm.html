@@ -1,0 +1,120 @@
+<template>
+    <lightning-card title="Greater Chennai Corporation - New Property Registration" icon-name="custom:custom585">
+        <div class="slds-p-around_medium">
+            <template lView if:true={isLoading}>
+                <lightning-spinner alternative-text="Processing registration..." size="medium"></lightning-spinner>
+            </template>
+
+            <div class="slds-notify slds-notify_alert slds-alert_info slds-m-bottom_medium" role="alert">
+                <span class="slds-assistive-text">info</span>
+                <h2>Register a residential, commercial, or mixed-use property for annual municipal tax assessment.</h2>
+            </div>
+
+            <lightning-messages></lightning-messages>
+
+            <div class="slds-grid slds-wrap slds-gutters">
+                <!-- Column 1: Property Identification -->
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12">
+                    <h3 class="slds-section__title slds-theme_shade slds-p-horizontal_small slds-m-bottom_small">
+                        1. Property & Location Details
+                    </h3>
+
+                    <lightning-input label="Property Assessment Number" value={propertyNumber}
+                        placeholder="e.g. CHN-ZN05-W114-0428" required onchange={handlePropNumberChange}>
+                    </lightning-input>
+
+                    <lightning-combobox label="Municipal Zone" value={selectedZone}
+                        options={zoneOptions} required onchange={handleZoneChange}>
+                    </lightning-combobox>
+
+                    <lightning-input label="Ward Number" value={ward}
+                        placeholder="e.g. Ward 114" onchange={handleWardChange}>
+                    </lightning-input>
+
+                    <lightning-input label="Street / Locality" value={street}
+                        placeholder="e.g. Usman Road, T. Nagar" onchange={handleStreetChange}>
+                    </lightning-input>
+
+                    <lightning-textarea label="Full Address" value={address}
+                        placeholder="Complete postal address with landmarks" onchange={handleAddressChange}>
+                    </lightning-textarea>
+                </div>
+
+                <!-- Column 2: Structural & Usage Details -->
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12">
+                    <h3 class="slds-section__title slds-theme_shade slds-p-horizontal_small slds-m-bottom_small">
+                        2. Structure & Tax Classification
+                    </h3>
+
+                    <lightning-combobox label="Property Type" value={selectedType}
+                        options={typeOptions} required onchange={handleTypeChange}>
+                    </lightning-combobox>
+
+                    <lightning-combobox label="Property Usage" value={selectedUsage}
+                        options={usageOptions} required onchange={handleUsageChange}>
+                    </lightning-combobox>
+
+                    <lightning-combobox label="Occupancy Type" value={selectedOccupancy}
+                        options={occupancyOptions} required onchange={handleOccupancyChange}>
+                    </lightning-combobox>
+
+                    <lightning-input type="number" label="Built-up Plinth Area (Sq Ft)" value={buildingArea}
+                        min="50" step="1" required onchange={handleAreaChange}>
+                    </lightning-input>
+
+                    <lightning-input type="number" label="Year of Construction" value={constructionYear}
+                        min="1900" max="2026" onchange={handleYearChange}>
+                    </lightning-input>
+                </div>
+            </div>
+
+            <!-- Ownership Details -->
+            <div class="slds-m-top_medium">
+                <h3 class="slds-section__title slds-theme_shade slds-p-horizontal_small slds-m-bottom_small">
+                    3. Registered Owner Particulars
+                </h3>
+
+                <div class="slds-grid slds-wrap slds-gutters">
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-12">
+                        <lightning-input label="Owner Legal Name" value={ownerName}
+                            placeholder="Full name as per title deed" required onchange={handleOwnerNameChange}>
+                        </lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-12">
+                        <lightning-input type="email" label="Owner Email" value={ownerEmail}
+                            placeholder="name@example.com" onchange={handleOwnerEmailChange}>
+                        </lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-12">
+                        <lightning-input type="tel" label="Owner Mobile Number" value={ownerPhone}
+                            placeholder="+91 98401 XXXXX" onchange={handleOwnerPhoneChange}>
+                        </lightning-input>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Estimated Tax Preview Card -->
+            <div class="slds-box slds-theme_default slds-m-top_large preview-box">
+                <div class="slds-grid slds-grid_vertical-align-center slds-grid_align-spread">
+                    <div>
+                        <span class="slds-badge slds-theme_success">Instant Estimation Preview</span>
+                        <div class="slds-text-heading_small slds-m-top_x-small">
+                            Estimated Annual Tax: <strong>₹{previewTaxAmount}</strong>
+                        </div>
+                        <p class="slds-text-body_small slds-text-color_weak">
+                            Based on {buildingArea} sq ft in {selectedZone} ({selectedOccupancy})
+                        </p>
+                    </div>
+                    <div>
+                        <lightning-button label="Estimate Breakdown" icon-name="utility:calculator"
+                            onclick={handleOpenEstimatorModal} class="slds-m-right_x-small">
+                        </lightning-button>
+                        <lightning-button variant="brand" label="Register Property" icon-name="utility:save"
+                            onclick={handleRegister}>
+                        </lightning-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </lightning-card>
+</template>

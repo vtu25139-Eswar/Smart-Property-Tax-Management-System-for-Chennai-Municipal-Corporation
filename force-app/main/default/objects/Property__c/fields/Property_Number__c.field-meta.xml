@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Property_Number__c</fullName>
+    <description>Unique municipal property assessment number</description>
+    <label>Property Number</label>
+    <length>50</length>
+    <required>true</required>
+    <unique>true</unique>
+    <externalId>true</externalId>
+    <type>Text</type>
+</CustomField>

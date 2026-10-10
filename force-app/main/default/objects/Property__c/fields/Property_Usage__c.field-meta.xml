@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Property_Usage__c</fullName>
+    <description>Detailed functional usage of the property</description>
+    <label>Property Usage</label>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Residential Individual</fullName>
+                <default>true</default>
+                <label>Residential Individual</label>
+            </value>
+            <value>
+                <fullName>Apartment Complex</fullName>
+                <default>false</default>
+                <label>Apartment Complex</label>
+            </value>
+            <value>
+                <fullName>Retail Commercial</fullName>
+                <default>false</default>
+                <label>Retail Commercial</label>
+            </value>
+            <value>
+                <fullName>Corporate Office</fullName>
+                <default>false</default>
+                <label>Corporate Office</label>
+            </value>
+            <value>
+                <fullName>Industrial Warehouse</fullName>
+                <default>false</default>
+                <label>Industrial Warehouse</label>
+            </value>
+            <value>
+                <fullName>Educational/Hospital</fullName>
+                <default>false</default>
+                <label>Educational/Hospital</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <type>Picklist</type>
+</CustomField>

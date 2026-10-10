@@ -1,0 +1,130 @@
+<template>
+    <lightning-card title="Greater Chennai Corporation - Municipal Property Tax Dashboard" icon-name="standard:dashboard">
+        <div class="slds-p-around_medium">
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Loading Municipal Analytics..." size="medium"></lightning-spinner>
+            </template>
+
+            <!-- Header banner -->
+            <div class="slds-page-header slds-m-bottom_medium header-banner">
+                <div class="slds-page-header__row">
+                    <div class="slds-page-header__col-title">
+                        <div class="slds-media">
+                            <div class="slds-media__body">
+                                <h1 class="slds-page-header__title slds-truncate title-text">
+                                    Revenue Administration & Verification Command Center
+                                </h1>
+                                <p class="slds-page-header__name-meta">
+                                    Real-time tracking of assessments, collections, and physical audit priorities across 15 Chennai Zones.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-page-header__col-actions">
+                        <lightning-button label="Refresh Data" icon-name="utility:refresh" onclick={handleRefresh} class="slds-m-right_x-small"></lightning-button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KPI Metric Cards Grid -->
+            <div class="slds-grid slds-wrap slds-gutters slds-m-bottom_large">
+                <div class="slds-col slds-size_1-of-1 slds-small-size_1-of-2 slds-large-size_3-of-12 slds-m-bottom_small">
+                    <div class="slds-box kpi-card kpi-blue">
+                        <div class="slds-text-title_caps">Total Properties</div>
+                        <div class="slds-text-heading_large slds-m-top_x-small">{metrics.totalProperties}</div>
+                        <div class="kpi-subtitle">Registered in GCC Registry</div>
+                    </div>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size_1-of-2 slds-large-size_3-of-12 slds-m-bottom_small">
+                    <div class="slds-box kpi-card kpi-purple">
+                        <div class="slds-text-title_caps">Assessed Annual Tax</div>
+                        <div class="slds-text-heading_large slds-m-top_x-small">₹{formattedAssessedTax}</div>
+                        <div class="kpi-subtitle">Gross Assessed Revenue Base</div>
+                    </div>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size_1-of-2 slds-large-size_3-of-12 slds-m-bottom_small">
+                    <div class="slds-box kpi-card kpi-green">
+                        <div class="slds-text-title_caps">Tax Collected</div>
+                        <div class="slds-text-heading_large slds-m-top_x-small">₹{formattedCollectedTax}</div>
+                        <div class="kpi-subtitle">Efficiency: {metrics.collectionEfficiency}%</div>
+                    </div>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size_1-of-2 slds-large-size_3-of-12 slds-m-bottom_small">
+                    <div class="slds-box kpi-card kpi-red">
+                        <div class="slds-text-title_caps">Outstanding Arrears</div>
+                        <div class="slds-text-heading_large slds-m-top_x-small">₹{formattedDues}</div>
+                        <div class="kpi-subtitle">Pending Municipal Realization</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Verification & Audit Workload Strip -->
+            <div class="slds-grid slds-wrap slds-gutters slds-m-bottom_large">
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12">
+                    <div class="slds-box slds-theme_shade">
+                        <div class="slds-grid slds-grid_align-spread slds-m-bottom_x-small">
+                            <span class="slds-text-heading_small">Verification Queue Backlog</span>
+                            <span class="slds-badge slds-theme_warning">{metrics.unverifiedCount} Unverified</span>
+                        </div>
+                        <p class="slds-text-body_small slds-text-color_weak slds-m-bottom_small">
+                            Properties awaiting on-site physical survey or title document scrutiny.
+                        </p>
+                        <div class="slds-progress-bar slds-progress-bar_large" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" role="progressbar">
+                            <span class="slds-progress-bar__value progress-amber" style="width: 60%"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12">
+                    <div class="slds-box slds-theme_shade">
+                        <div class="slds-grid slds-grid_align-spread slds-m-bottom_x-small">
+                            <span class="slds-text-heading_small">High-Priority Audit Targets</span>
+                            <span class="slds-badge slds-theme_error">{metrics.highPriorityCount} High Priority</span>
+                        </div>
+                        <p class="slds-text-body_small slds-text-color_weak slds-m-bottom_small">
+                            Properties flagged by the scoring algorithm (commercial scale, missing info, or large tax arrears).
+                        </p>
+                        <div class="slds-progress-bar slds-progress-bar_large" aria-valuemin="0" aria-valuemax="100" aria-valuenow="25" role="progressbar">
+                            <span class="slds-progress-bar__value progress-red" style="width: 35%"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chennai Zone-wise Distribution Table -->
+            <div class="slds-m-top_medium">
+                <h2 class="slds-text-heading_small slds-m-bottom_small font-bold">
+                    Zone-wise Revenue Distribution (Chennai Municipal Corporation)
+                </h2>
+
+                <div class="slds-table_responsive">
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped">
+                        <thead>
+                            <tr class="slds-line-height_reset">
+                                <th scope="col"><div class="slds-truncate">Zone Name</div></th>
+                                <th scope="col"><div class="slds-truncate">Registered Properties</div></th>
+                                <th scope="col"><div class="slds-truncate">Pending Dues (INR)</div></th>
+                                <th scope="col"><div class="slds-truncate">Audit Status</div></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template for:each={metrics.zoneBreakdown} for:item="z">
+                                <tr key={z.zone}>
+                                    <td><div class="slds-truncate font-bold">{z.zone}</div></td>
+                                    <td><div class="slds-truncate">{z.count}</div></td>
+                                    <td><div class="slds-truncate dues-text">₹{z.dues}</div></td>
+                                    <td>
+                                        <span class="slds-badge slds-theme_success">Active</span>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </lightning-card>
+</template>

@@ -1,0 +1,123 @@
+{
+  "info": {
+    "_postman_id": "b3e942f1-4f12-4d2a-8921-chennai-property-tax",
+    "name": "Greater Chennai Corporation - Property Tax REST API",
+    "description": "Postman Collection for testing the Smart Property Tax Management System REST API in Salesforce.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Get Property & Dues By Number",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{instance_url}}/services/apexrest/v1/property-tax/properties/CHN-ZN05-W052-1001",
+          "host": [
+            "{{instance_url}}"
+          ],
+          "path": [
+            "services",
+            "apexrest",
+            "v1",
+            "property-tax",
+            "properties",
+            "CHN-ZN05-W052-1001"
+          ]
+        },
+        "description": "Retrieves property particulars, current assessment, outstanding dues, and payment history."
+      },
+      "response": []
+    },
+    {
+      "name": "2. On-the-Fly Tax Estimation API",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"buildingArea\": 1500,\n  \"zone\": \"Zone 5 - Royapuram\",\n  \"propertyType\": \"Residential\",\n  \"propertyUsage\": \"Residential Individual\",\n  \"occupancyType\": \"Self-Occupied\",\n  \"financialYear\": \"2025-2026\"\n}"
+        },
+        "url": {
+          "raw": "{{instance_url}}/services/apexrest/v1/property-tax/assess",
+          "host": [
+            "{{instance_url}}"
+          ],
+          "path": [
+            "services",
+            "apexrest",
+            "v1",
+            "property-tax",
+            "assess"
+          ]
+        },
+        "description": "Calculates explainable municipal tax estimate with cess, rebate, and itemized audit trail."
+      },
+      "response": []
+    },
+    {
+      "name": "3. Record Simulated Citizen Tax Payment",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"propertyNumber\": \"CHN-ZN05-W052-1001\",\n  \"amountPaid\": 5000.00,\n  \"paymentMode\": \"Online - UPI\",\n  \"payerName\": \"Karthik Subramanian\",\n  \"payerEmail\": \"karthik.subramanian@example.com\"\n}"
+        },
+        "url": {
+          "raw": "{{instance_url}}/services/apexrest/v1/property-tax/payments",
+          "host": [
+            "{{instance_url}}"
+          ],
+          "path": [
+            "services",
+            "apexrest",
+            "v1",
+            "property-tax",
+            "payments"
+          ]
+        },
+        "description": "Simulates municipal payment processing, records Tax_Payment__c, settles dues, and returns official receipt."
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "instance_url",
+      "value": "https://brave-panda-9mfmin-dev-ed.trailblaze.my.salesforce.com"
+    },
+    {
+      "key": "access_token",
+      "value": "YOUR_OAUTH_ACCESS_TOKEN"
+    }
+  ]
+}

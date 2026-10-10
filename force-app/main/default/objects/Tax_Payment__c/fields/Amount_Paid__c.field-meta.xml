@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Amount_Paid__c</fullName>
+    <description>Transaction payment amount in INR</description>
+    <label>Amount Paid (INR)</label>
+    <precision>12</precision>
+    <scale>2</scale>
+    <required>true</required>
+    <type>Currency</type>
+</CustomField>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Property__c</fullName>
+    <description>Associated property</description>
+    <label>Property</label>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <referenceTo>Property__c</referenceTo>
+    <relationshipLabel>Tax Payments</relationshipLabel>
+    <relationshipName>Tax_Payments</relationshipName>
+    <required>false</required>
+    <type>Lookup</type>
+</CustomField>
