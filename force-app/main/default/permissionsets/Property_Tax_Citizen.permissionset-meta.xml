@@ -3,6 +3,10 @@
     <description>Allows citizens to register properties, view assessments, make payments, and file disputes.</description>
     <hasActivationRequired>false</hasActivationRequired>
     <label>Property Tax Citizen User</label>
+    <applicationVisibilities>
+        <application>Smart_Property_Tax_Management</application>
+        <visible>true</visible>
+    </applicationVisibilities>
     <classAccesses>
         <apexClass>TaxCalculationService</apexClass>
         <enabled>true</enabled>

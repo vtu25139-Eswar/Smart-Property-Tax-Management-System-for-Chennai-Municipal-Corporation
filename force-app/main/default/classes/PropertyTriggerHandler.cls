@@ -7,6 +7,11 @@ public with sharing class PropertyTriggerHandler {
     private static Boolean isExecuting = false;
 
     public static void handleBeforeInsert(List<Property__c> newRecords) {
+        for (Property__c p : newRecords) {
+            if (p.Area_in_Sq_Ft__c == null && p.Building_Area_SqFt__c != null) {
+                p.Area_in_Sq_Ft__c = p.Building_Area_SqFt__c;
+            }
+        }
         formatAndValidatePropertyNumbers(newRecords);
         PropertyVerificationScoreService.calculateScores(newRecords);
     }

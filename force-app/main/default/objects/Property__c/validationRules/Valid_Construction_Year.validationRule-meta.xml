@@ -3,6 +3,6 @@
     <fullName>Valid_Construction_Year</fullName>
     <active>true</active>
     <description>Validates construction year bounds.</description>
-    <errorConditionFormula>AND(NOT(ISBLANK(Construction_Year__c)), OR(Construction_Year__c < 1850, Construction_Year__c > YEAR(TODAY())))</errorConditionFormula>
+    <errorConditionFormula>AND(NOT(ISBLANK(Construction_Year__c)), OR(Construction_Year__c &lt; 1850, Construction_Year__c &gt; YEAR(TODAY())))</errorConditionFormula>
     <errorMessage>Construction year must be between 1850 and the current year.</errorMessage>
 </ValidationRule>

@@ -12,16 +12,14 @@
     <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
     <label>Smart Property Tax Management</label>
     <navType>Standard</navType>
-    <tabs>
-        <tab>standard-home</tab>
-        <tab>Property__c</tab>
-        <tab>Tax_Assessment__c</tab>
-        <tab>Tax_Payment__c</tab>
-        <tab>Verification_Request__c</tab>
-        <tab>Assessment_Dispute__c</tab>
-        <tab>Tax_Rate__c</tab>
-        <tab>standard-report</tab>
-        <tab>standard-Dashboard</tab>
-    </tabs>
+    <tabs>standard-home</tabs>
+    <tabs>Property__c</tabs>
+    <tabs>Tax_Assessment__c</tabs>
+    <tabs>Tax_Payment__c</tabs>
+    <tabs>Verification_Request__c</tabs>
+    <tabs>Assessment_Dispute__c</tabs>
+    <tabs>Tax_Rate__c</tabs>
+    <tabs>standard-report</tabs>
+    <tabs>standard-Dashboard</tabs>
     <uiType>Lightning</uiType>
 </CustomApplication>

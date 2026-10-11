@@ -22,6 +22,10 @@ public with sharing class TaxPaymentTriggerHandler {
                 pay.Payment_Reference__c = 'PAY-CHN-' + DateTime.now().format('yyyyMMdd') + '-' + randSuffix;
             }
 
+            if (String.isBlank(pay.Receipt_Number__c)) {
+                pay.Receipt_Number__c = pay.Payment_Reference__c;
+            }
+
             if (String.isBlank(pay.Gateway_Transaction_Id__c)) {
                 pay.Gateway_Transaction_Id__c = 'TXN-SIM-' + Crypto.getRandomLong();
             }

@@ -3,6 +3,6 @@
     <fullName>Building_Area_Must_Be_Positive</fullName>
     <active>true</active>
     <description>Ensures assessed area is strictly positive.</description>
-    <errorConditionFormula>Building_Area_SqFt__c <= 0</errorConditionFormula>
+    <errorConditionFormula>Building_Area_SqFt__c &lt;= 0</errorConditionFormula>
     <errorMessage>Building Area in square feet must be greater than zero.</errorMessage>
 </ValidationRule>

@@ -3,6 +3,10 @@
     <description>Municipal assessment officers calculating tax schedules, reviewing areas, and submitting assessments for approval.</description>
     <hasActivationRequired>false</hasActivationRequired>
     <label>Property Tax Assessor</label>
+    <applicationVisibilities>
+        <application>Smart_Property_Tax_Management</application>
+        <visible>true</visible>
+    </applicationVisibilities>
     <classAccesses>
         <apexClass>TaxCalculationService</apexClass>
         <enabled>true</enabled>

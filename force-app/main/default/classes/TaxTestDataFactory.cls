@@ -33,6 +33,12 @@ public class TaxTestDataFactory {
                 Is_Active__c = true
             )
         };
+        for (Tax_Rate__c r : rates) {
+            r.Usage_Type__c = 'Residential, Commercial, Industrial, Mixed Use';
+            r.Rate_Per_Sq_Ft__c = r.Base_Rate_Per_SqFt__c;
+            r.Effective_From__c = Date.newInstance(2025, 4, 1);
+            r.Active__c = true;
+        }
         insert rates;
         return rates;
     }
@@ -55,6 +61,7 @@ public class TaxTestDataFactory {
             Property_Usage__c = 'Residential Individual',
             Verification_Status__c = 'Unverified'
         );
+        p.Area_in_Sq_Ft__c = p.Building_Area_SqFt__c;
         insert p;
         return p;
     }
@@ -85,6 +92,7 @@ public class TaxTestDataFactory {
         Tax_Payment__c pay = new Tax_Payment__c(
             Tax_Assessment__c = assessmentId,
             Property__c = propId,
+            Payment_Reference__c = 'PAY-TEST-' + Math.abs(Crypto.getRandomInteger()),
             Amount_Paid__c = amount,
             Payment_Mode__c = 'Online - UPI',
             Payment_Status__c = 'Success',

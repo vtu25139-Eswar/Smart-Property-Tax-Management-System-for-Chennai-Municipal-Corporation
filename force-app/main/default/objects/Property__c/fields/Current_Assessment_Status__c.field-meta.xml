@@ -18,9 +18,9 @@
                 <label>Pending Approval</label>
             </value>
             <value>
-                <fullName>Assessed & Active</fullName>
+                <fullName>Assessed &amp; Active</fullName>
                 <default>false</default>
-                <label>Assessed & Active</label>
+                <label>Assessed &amp; Active</label>
             </value>
             <value>
                 <fullName>Under Dispute</fullName>

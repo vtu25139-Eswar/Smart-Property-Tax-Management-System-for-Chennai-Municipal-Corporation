@@ -129,10 +129,11 @@ function writeField(objName, field) {
         specificTags = `    <required>${field.required || false}</required>
     <unique>${field.unique || false}</unique>`;
     } else if (field.type === 'Picklist') {
+        const escapeXml = (str) => String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
         const valSetValues = field.values.map(v => `            <value>
-                <fullName>${v}</fullName>
+                <fullName>${escapeXml(v)}</fullName>
                 <default>${v === field.defaultValue}</default>
-                <label>${v}</label>
+                <label>${escapeXml(v)}</label>
             </value>`).join('\n');
 
         specificTags = `    <valueSet>
@@ -226,14 +227,14 @@ propertyFields.forEach(f => writeField('Property__c', f));
 
 writeValidationRule('Property__c', {
     fullName: 'Building_Area_Must_Be_Positive',
-    formula: 'Building_Area_SqFt__c <= 0',
+    formula: 'Building_Area_SqFt__c &lt;= 0',
     message: 'Building Area in square feet must be greater than zero.',
     description: 'Ensures assessed area is strictly positive.'
 });
 
 writeValidationRule('Property__c', {
     fullName: 'Valid_Construction_Year',
-    formula: 'AND(NOT(ISBLANK(Construction_Year__c)), OR(Construction_Year__c < 1850, Construction_Year__c > YEAR(TODAY())))',
+    formula: 'AND(NOT(ISBLANK(Construction_Year__c)), OR(Construction_Year__c &lt; 1850, Construction_Year__c &gt; YEAR(TODAY())))',
     message: 'Construction year must be between 1850 and the current year.',
     description: 'Validates construction year bounds.'
 });
@@ -309,7 +310,8 @@ const paymentFields = [
     { fullName: 'Payer_Phone__c', label: 'Payer Phone', type: 'Phone', description: 'Contact phone of payer' },
     { fullName: 'Is_Simulated_Transaction__c', label: 'Simulated Sandbox Transaction', type: 'Checkbox', defaultValue: true, description: 'Flag marking simulated demo payment' },
     { fullName: 'Gateway_Transaction_Id__c', label: 'Gateway Transaction ID', type: 'Text', length: 100, description: 'Simulated payment gateway reference ID' },
-    { fullName: 'Gateway_Response__c', label: 'Gateway Response', type: 'LongTextArea', length: 1500, description: 'Raw payload response from simulated payment gateway' }
+    { fullName: 'Gateway_Response__c', label: 'Gateway Response', type: 'LongTextArea', length: 1500, description: 'Raw payload response from simulated payment gateway' },
+    { fullName: 'Receipt_Number__c', label: 'Receipt Number', type: 'Text', length: 50, description: 'Municipal payment receipt number' }
 ];
 
 paymentFields.forEach(f => writeField('Tax_Payment__c', f));
@@ -328,7 +330,7 @@ const verificationFields = [
     { fullName: 'Physical_Area_Measured__c', label: 'Physical Area Measured (Sq Ft)', type: 'Number', precision: 10, scale: 2, description: 'Plinth area physically surveyed on-site' },
     { fullName: 'Area_Discrepancy_Percent__c', label: 'Area Discrepancy (%)', type: 'Percent', precision: 5, scale: 2, description: 'Percentage difference between declared and measured area' },
     { fullName: 'Inspector_Remarks__c', label: 'Inspector Remarks', type: 'LongTextArea', length: 2000, description: 'Notes recorded during site inspection' },
-    { fullName: 'Inspection_Findings__c', label: 'Inspection Findings', type: 'Picklist', values: ['Area Verified Accurately', 'Minor Variation (<5%)', 'Major Discrepancy (>10%)', 'Unauthorized Construction', 'Change in Property Usage'], defaultValue: 'Area Verified Accurately', description: 'Classification of physical inspection result' }
+    { fullName: 'Inspection_Findings__c', label: 'Inspection Findings', type: 'Picklist', values: ['Area Verified Accurately', 'Minor Variation (&lt;5%)', 'Major Discrepancy (&gt;10%)', 'Unauthorized Construction', 'Change in Property Usage'], defaultValue: 'Area Verified Accurately', description: 'Classification of physical inspection result' }
 ];
 
 verificationFields.forEach(f => writeField('Verification_Request__c', f));

@@ -3,6 +3,10 @@
     <description>Field inspectors conducting site visits, measuring built areas, and updating verification statuses.</description>
     <hasActivationRequired>false</hasActivationRequired>
     <label>Property Tax Verification Officer</label>
+    <applicationVisibilities>
+        <application>Smart_Property_Tax_Management</application>
+        <visible>true</visible>
+    </applicationVisibilities>
     <classAccesses>
         <apexClass>TaxCalculationService</apexClass>
         <enabled>true</enabled>

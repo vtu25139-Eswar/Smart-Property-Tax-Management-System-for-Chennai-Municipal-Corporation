@@ -13,14 +13,14 @@
                 <label>Area Verified Accurately</label>
             </value>
             <value>
-                <fullName>Minor Variation (<5%)</fullName>
+                <fullName>Minor Variation (&lt;5%)</fullName>
                 <default>false</default>
-                <label>Minor Variation (<5%)</label>
+                <label>Minor Variation (&lt;5%)</label>
             </value>
             <value>
-                <fullName>Major Discrepancy (>10%)</fullName>
+                <fullName>Major Discrepancy (&gt;10%)</fullName>
                 <default>false</default>
-                <label>Major Discrepancy (>10%)</label>
+                <label>Major Discrepancy (&gt;10%)</label>
             </value>
             <value>
                 <fullName>Unauthorized Construction</fullName>

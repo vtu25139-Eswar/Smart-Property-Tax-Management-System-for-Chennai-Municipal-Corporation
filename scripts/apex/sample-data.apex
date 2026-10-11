@@ -87,6 +87,12 @@ List<Tax_Rate__c> rateList = new List<Tax_Rate__c>{
         Description__c = 'GCC Standard Baseline Rate across Chennai'
     )
 };
+for (Tax_Rate__c r : rateList) {
+    r.Usage_Type__c = 'Residential, Commercial, Industrial, Mixed Use';
+    r.Rate_Per_Sq_Ft__c = r.Base_Rate_Per_SqFt__c;
+    r.Effective_From__c = Date.newInstance(2025, 4, 1);
+    r.Active__c = true;
+}
 insert rateList;
 System.debug('Inserted ' + rateList.size() + ' tax rate records.');
 
@@ -178,6 +184,9 @@ List<Property__c> sampleProps = new List<Property__c>{
         Verification_Status__c = 'Verified'
     )
 };
+for (Property__c p : sampleProps) {
+    p.Area_in_Sq_Ft__c = p.Building_Area_SqFt__c;
+}
 insert sampleProps;
 System.debug('Inserted ' + sampleProps.size() + ' properties.');
 
@@ -215,6 +224,7 @@ List<Tax_Payment__c> demoPayments = new List<Tax_Payment__c>{
         Tax_Assessment__c = asms[0].Id,
         Property__c = sampleProps[0].Id,
         Amount_Paid__c = asms[0].Total_Assessed_Tax__c,
+        Payment_Reference__c = 'PAY-CHN-DEMO-001',
         Payment_Mode__c = 'Online - UPI',
         Payment_Status__c = 'Success',
         Payer_Name__c = 'Karthik Subramanian',
@@ -225,6 +235,7 @@ List<Tax_Payment__c> demoPayments = new List<Tax_Payment__c>{
         Tax_Assessment__c = asms[1].Id,
         Property__c = sampleProps[1].Id,
         Amount_Paid__c = (asms[1].Total_Assessed_Tax__c / 2).setScale(2, RoundingMode.HALF_UP),
+        Payment_Reference__c = 'PAY-CHN-DEMO-002',
         Payment_Mode__c = 'Online - Net Banking',
         Payment_Status__c = 'Success',
         Payer_Name__c = 'S. Meenakshi Sundaram',

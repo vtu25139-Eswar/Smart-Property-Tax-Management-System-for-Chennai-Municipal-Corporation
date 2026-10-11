@@ -3,6 +3,10 @@
     <description>Zonal commissioners with authority to approve assessments, resolve citizen disputes, and review zonal performance.</description>
     <hasActivationRequired>false</hasActivationRequired>
     <label>Property Tax Zonal Head</label>
+    <applicationVisibilities>
+        <application>Smart_Property_Tax_Management</application>
+        <visible>true</visible>
+    </applicationVisibilities>
     <classAccesses>
         <apexClass>TaxCalculationService</apexClass>
         <enabled>true</enabled>

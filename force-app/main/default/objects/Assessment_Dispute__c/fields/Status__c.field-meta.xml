@@ -23,9 +23,9 @@
                 <label>Hearing Scheduled</label>
             </value>
             <value>
-                <fullName>Accepted & Reassessed</fullName>
+                <fullName>Accepted &amp; Reassessed</fullName>
                 <default>false</default>
-                <label>Accepted & Reassessed</label>
+                <label>Accepted &amp; Reassessed</label>
             </value>
             <value>
                 <fullName>Rejected</fullName>
